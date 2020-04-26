@@ -11,28 +11,9 @@ import sys
 import re
 import string
 
-# This is the uploader widget
-
-def _upload():
-
-    _upload_widget = fileupload.FileUploadWidget()
-
-    def _cb(change):
-        global file_contents
-        decoded = io.StringIO(change['owner'].data.decode('utf-8'))
-        filename = change['owner'].filename
-        print('Uploaded `{}` ({:.2f} kB)'.format(
-            filename, len(decoded.read()) / 2 **10))
-        file_contents = decoded.getvalue()
-
-    _upload_widget.observe(_cb, names='data')
-    display(_upload_widget)
-
-#_upload()
-
 def _file_upload():
 
-   f=open("pg6695.txt", "r")
+   f=open("baiboly.txt", "r")
 
    global file_contents
    file_contents = f.read()
@@ -42,17 +23,19 @@ _file_upload()
 
 def calculate_frequencies(file_contents):
     # Here is a list of punctuations and uninteresting words you can use to process your text
-    uninteresting_words = ["the", "a", "to", "if", "is", "it", "of", "and", "or", "an", "as", "i", "me", "my", \
-    "we", "our", "ours", "you", "your", "yours", "he", "she", "him", "his", "her", "hers", "its", "they", "them", \
-    "their", "what", "which", "who", "whom", "this", "that", "am", "are", "was", "were", "be", "been", "being", \
-    "have", "has", "had", "do", "does", "did", "but", "at", "by", "with", "from", "here", "when", "where", "how", \
-    "all", "any", "both", "each", "few", "more", "some", "such", "no", "nor", "too", "very", "can", "will", "just"]
+    uninteresting_words = ["ny", "ary", "dia", "ho", "hoe", "aoka", "sy", "fa", "samy", "eny", "ao", "efa", "i", "izay", \
+    "saha", "toa", "tsy", "ka", "no", "faha", "na", "ianao", "izay", "izy", "izaho", "hoy", "amin", "an", "koa", "amby", \
+    "tahiny", "tamiko", "taminy", "amiko", "kosa", "teo"]
     
     # LEARNER CODE START HERE
-    words = file_contents.split(" ")
+
+    doc = file_contents.replace('\n', '~')
+    words = doc.split(" ")
+
     
     # Strip punctuation
     table = str.maketrans('', '', string.punctuation)
+    print(string.punctuation)
     stripped = [w.translate(table) for w in words]
     print(stripped[:100])
 
